@@ -1,0 +1,26 @@
+{% extends CMS_TEMPLATE %}
+{% load cms_tags menu_tags i18n thumbnail %}
+
+{% block content %}{{ block.super }}
+    <h1>{% render_model object 'name' %}</h1>
+    {% with object.get_children as object_list %}
+        {% include 'catalog/include/category_list.html' %}
+    {% endwith %}
+
+    <div class="tabpanel">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            {% for cblock in object.contents.all %}
+            <li role="placeholder" class="active"><a href="#{{ cblock.name|slugify }}" aria-controls="{{ cblock.name|slugify }}" role="tab" data-toggle="tab">{{ cblock.name }}</a></li>
+            {% endfor %}
+        </ul>
+        <!-- Tab panes -->
+        <div class="tab-content">
+            {% for cblock in object.contents.all %}
+            <div role="tabpanel" class="tab-pane active" id="{{ cblock.name|slugify }}">
+                {% render_placeholder cblock.content %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock content %}

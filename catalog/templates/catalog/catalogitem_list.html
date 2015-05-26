@@ -1,0 +1,7 @@
+{% extends CMS_TEMPLATE %}
+{% load cms_tags menu_tags i18n thumbnail %}
+
+{% block content %}{{ block.super }}
+    <h1>{% trans 'Catalog' %}</h1>
+    {% include 'catalog/include/category_list.html' %}
+{% endblock content %}

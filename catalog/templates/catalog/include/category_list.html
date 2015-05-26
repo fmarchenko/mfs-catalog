@@ -1,0 +1,16 @@
+{% load cms_tags thumbnail %}
+<div class="row">
+{% for obj in object_list %}
+    <div class="col-sm-6 col-md-4">
+        <div class="thumbnail">
+            <a href="{{ obj.get_absolute_url }}">
+                {% thumbnail obj.image 320x160 upscale as thumb %}
+                {% if obj.image %}<img src="{{ thumb.url }}" alt="{{ obj.name }}" />{% endif %}
+                <div class="caption">
+                    <h3>{% render_model obj 'name' %}</h3>
+                </div>
+            </a>
+        </div>
+    </div>
+{% endfor %}
+</div>
