@@ -10,6 +10,7 @@ from . import views
 from . import models
 
 urlpatterns = patterns('',
+    url(r'^hot/$', views.ListView.as_view(queryset=models.Item.objects.filter(is_hot=True)), name='hotitem_list'),
     url(r'^(?P<slug>.*)/$', views.DetailView.as_view(model=models.CatalogItem), name='catalogitem_detail'),
     url(r'^$', views.ListView.as_view(queryset=models.CatalogItem.objects.filter(parent__isnull=True)), name='catalogitem_list'),
 )

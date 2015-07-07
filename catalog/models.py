@@ -84,7 +84,9 @@ class Category(CatalogItem):
 
 
 class Item(CatalogItem):
+    old_price = models.DecimalField(_(u'старая цена'), decimal_places=2, max_digits=10, default=-1)
     unit_price = models.DecimalField(_(u'цена'), decimal_places=2, max_digits=10, default=-1)
+    is_hot = models.BooleanField(_(u'горячее предложение'), default=False)
 
     class Meta:
         verbose_name = _(u'товар')
