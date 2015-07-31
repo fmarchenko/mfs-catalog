@@ -8,6 +8,7 @@ __date__ = "May 19, 2015"
 
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from pytils.translit import slugify
 from cms.models.fields import PlaceholderField
 from polymorphic_tree.models import PolymorphicMPTTModel, PolymorphicTreeForeignKey
 from easy_thumbnails.fields import ThumbnailerImageField
@@ -55,6 +56,9 @@ class CatalogContentBlock(models.Model):
 
     def __unicode__(self):
         return u'%s (%s)' % (self.name, self.sort_index)
+
+    def get_slug(self):
+        return slugify(self.name)
 
 
 def get_upload_path(instance, filename):
